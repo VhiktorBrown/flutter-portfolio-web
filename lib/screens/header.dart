@@ -36,7 +36,7 @@ class HeaderScreen extends StatelessWidget {
               //   alignment: Alignment.center,
               //   child: PictureWidget(),
               // ),
-              const PictureWidget(),
+              const PictureWidget().pOnly(left: 120),
               Row(
                 children: [
                   VStack([
@@ -58,52 +58,15 @@ class HeaderScreen extends StatelessWidget {
                       v: 32
                   ),
                   Expanded(
-                      child: VStack([
-                        [" - Introduction".text.gray500.widest.sm.make(),
-                        10.heightBox,
-                        "Flutter Developer, Native Android Developer. Android, iOS, Web, Flutter, Firebase."
-                        .text
-                        .white
-                        .xl3
-                        .maxLines(5)
-                        .make()
-                        .w(context.isMobile
-                            ? context.screenWidth
-                            : context.percentWidth * 40),
-                        20.heightBox,]
-                        .vStack(
-                          crossAlignment: CrossAxisAlignment.start,
-                        ),
-                        ElevatedButton(
-                          onPressed: () {
-                            launchUrl(Uri.parse("https://syticks.com"));
-                          },
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all<Color>(AppColors.accentColor),
-                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                )
-                            ),
-                            padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-                              EdgeInsets.symmetric(horizontal: 10),
-                            ),
-                            overlayColor: MaterialStateProperty.resolveWith<Color>(
-                                  (Set<MaterialState> states) {
-                                if (states.contains(MaterialState.hovered)) {
-                                  return Vx.purple700; // Replace with your desired hover color
-                                }
-                                return AppColors.accentColor; // Use the default overlay color when not hovered
-                              },
-                            ),
-                            mouseCursor: MaterialStateMouseCursor.clickable,
-                          ),
-                          child: "Visit my portfolio website".text.make(),
-                        ).h(50),
-                      ],
-                        alignment: MainAxisAlignment.spaceEvenly,
-                        crossAlignment: CrossAxisAlignment.start,
-                    )
+                      child: VxResponsive(
+                        fallback: const Offstage(),
+                        medium: IntroductionWidget()
+                            .pOnly(left: 120)
+                            .h(context.percentHeight * 60),
+                        large: IntroductionWidget()
+                            .pOnly(left: 120)
+                            .h(context.percentHeight * 60)
+                      )
                   )
                 ],
               )
@@ -113,6 +76,61 @@ class HeaderScreen extends StatelessWidget {
     );
   }
 }
+
+class IntroductionWidget extends StatelessWidget {
+  const IntroductionWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return VStack([
+      ["- Introduction".text.gray500.widest.sm.make(),
+        10.heightBox,
+        "Flutter Developer, Native Android Developer. Android, iOS, Web, Flutter, Firebase."
+            .text
+            .white
+            .xl3
+            .maxLines(5)
+            .make()
+            .w(context.isMobile
+            ? context.screenWidth
+            : context.percentWidth * 40),
+        20.heightBox,]
+          .vStack(
+        crossAlignment: CrossAxisAlignment.start,
+      ),
+      ElevatedButton(
+        onPressed: () {
+          launchUrl(Uri.parse("https://syticks.com"));
+        },
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all<Color>(AppColors.accentColor),
+          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+              )
+          ),
+          padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+            EdgeInsets.symmetric(horizontal: 10),
+          ),
+          overlayColor: MaterialStateProperty.resolveWith<Color>(
+                (Set<MaterialState> states) {
+              if (states.contains(MaterialState.hovered)) {
+                return Vx.purple700; // Replace with your desired hover color
+              }
+              return AppColors.accentColor; // Use the default overlay color when not hovered
+            },
+          ),
+          mouseCursor: MaterialStateMouseCursor.clickable,
+        ),
+        child: "Visit my portfolio website".text.make(),
+      ).h(50),
+    ],
+      alignment: MainAxisAlignment.spaceEvenly,
+      crossAlignment: CrossAxisAlignment.start,
+    );
+  }
+}
+
 
 class PictureWidget extends StatelessWidget {
   const PictureWidget({Key? key}) : super(key: key);
