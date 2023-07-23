@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio_website/screens/home.dart';
 
 void main() {
@@ -18,6 +19,7 @@ class MyApp extends StatelessWidget {
         //colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
         primarySwatch: Colors.orange,
+        textTheme: GoogleFonts.poppinsTextTheme(),
         visualDensity: VisualDensity.adaptivePlatformDensity
       ),
       home: const HomeScreen()
