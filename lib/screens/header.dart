@@ -25,6 +25,17 @@ class HeaderScreen extends StatelessWidget {
         child: VxBox(
           child: VStack([
             ZStack([
+              // Padding(
+              //   // Add padding to the PictureWidget
+              //   padding: EdgeInsets.symmetric(
+              //     horizontal: context.percentWidth * 10,
+              //   ),
+              //   child: const PictureWidget(),
+              // ),
+              // const Align(
+              //   alignment: Alignment.center,
+              //   child: PictureWidget(),
+              // ),
               const PictureWidget(),
               Row(
                 children: [
@@ -48,16 +59,51 @@ class HeaderScreen extends StatelessWidget {
                   ),
                   Expanded(
                       child: VStack([
-                        " - Introduction".text.gray500.widest.sm.make(),
+                        [" - Introduction".text.gray500.widest.sm.make(),
                         10.heightBox,
                         "Flutter Developer, Native Android Developer. Android, iOS, Web, Flutter, Firebase."
                         .text
                         .white
                         .xl3
-                        .maxLines(3)
-                        .make(),
-                        20.heightBox,
-                      ])
+                        .maxLines(5)
+                        .make()
+                        .w(context.isMobile
+                            ? context.screenWidth
+                            : context.percentWidth * 40),
+                        20.heightBox,]
+                        .vStack(
+                          crossAlignment: CrossAxisAlignment.start,
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            launchUrl(Uri.parse("https://syticks.com"));
+                          },
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all<Color>(AppColors.accentColor),
+                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                )
+                            ),
+                            padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+                              EdgeInsets.symmetric(horizontal: 10),
+                            ),
+                            overlayColor: MaterialStateProperty.resolveWith<Color>(
+                                  (Set<MaterialState> states) {
+                                if (states.contains(MaterialState.hovered)) {
+                                  return Vx.purple700; // Replace with your desired hover color
+                                }
+                                return AppColors.accentColor; // Use the default overlay color when not hovered
+                              },
+                            ),
+                            mouseCursor: MaterialStateMouseCursor.clickable,
+                          ),
+                          child: "Visit my portfolio website".text.make(),
+                        ).h(50),
+                      ],
+                        alignment: MainAxisAlignment.spaceEvenly,
+                        crossAlignment: CrossAxisAlignment.start,
+                    )
                   )
                 ],
               )
