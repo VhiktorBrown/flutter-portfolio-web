@@ -36,7 +36,9 @@ class HeaderScreen extends StatelessWidget {
               //   alignment: Alignment.center,
               //   child: PictureWidget(),
               // ),
-              const PictureWidget().pOnly(left: 120),
+              Padding(
+                padding: EdgeInsets.only(left: 150),
+                  child: const PictureWidget().pOnly(left: 120)),
               Row(
                 children: [
                   VStack([

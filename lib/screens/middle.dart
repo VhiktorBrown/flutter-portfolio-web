@@ -26,7 +26,7 @@ class IntermediateScreen extends StatelessWidget {
             child: VxSwiper(
               items: [
                 ProjectWidget(title: "iQuest", url: 'https://play.google.com/store/apps/details?id=com.app.iquest_unizik'),
-                ProjectWidget(title: "Device Track", url: 'https://github.com/VhiktorBrown/device-tracker',),
+                ProjectWidget(title: "Device Tracker", url: 'https://github.com/VhiktorBrown/device-tracker',),
                 ProjectWidget(title: "Syticks", url: 'https://play.google.com/store/apps/details?id=com.app.syticks'),
                 ProjectWidget(title: "Syticks For Businesses", url: 'https://play.google.com/store/apps/details?id=com.app.syticks_organizers')
               ],
@@ -58,28 +58,31 @@ class ProjectWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: (){
-        _launchURL(Uri.parse(url!));
-      },
-      child: title
-          .text
-          .bold
-          .white
-          .xl
-          .wide
-          .center
-          .make()
-          .box
-          .p8
-          .roundedLg
-          .alignCenter
-          .square(200)
-          .neumorphic(
-          color: Vx.purple700,
-          elevation: 5.0,
-          curve: VxCurve.flat)
-          .make().p8(),
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: (){
+          _launchURL(Uri.parse(url!));
+        },
+        child: title
+            .text
+            .bold
+            .white
+            .xl
+            .wide
+            .center
+            .make()
+            .box
+            .p8
+            .roundedLg
+            .alignCenter
+            .square(200)
+            .neumorphic(
+            color: Vx.purple700,
+            elevation: 5.0,
+            curve: VxCurve.flat)
+            .make().p8(),
+      ),
     );
   }
 }
