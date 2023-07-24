@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class IntermediateScreen extends StatelessWidget {
@@ -24,10 +25,10 @@ class IntermediateScreen extends StatelessWidget {
           Expanded(
             child: VxSwiper(
               items: [
-                ProjectWidget(title: "iQuest"),
-                ProjectWidget(title: "Device Track"),
-                ProjectWidget(title: "Syticks"),
-                ProjectWidget(title: "Syticks For Businesses")
+                ProjectWidget(title: "iQuest", url: 'https://play.google.com/store/apps/details?id=com.app.iquest_unizik'),
+                ProjectWidget(title: "Device Track", url: 'https://github.com/VhiktorBrown/device-tracker',),
+                ProjectWidget(title: "Syticks", url: 'https://play.google.com/store/apps/details?id=com.app.syticks'),
+                ProjectWidget(title: "Syticks For Businesses", url: 'https://play.google.com/store/apps/details?id=com.app.syticks_organizers')
               ],
               height: 170,
               enlargeCenterPage: true,
@@ -43,28 +44,43 @@ class IntermediateScreen extends StatelessWidget {
 }
 
 class ProjectWidget extends StatelessWidget {
-  const ProjectWidget({Key? key, required this.title}) : super(key: key);
+  const ProjectWidget({Key? key, required this.title, this.url}) : super(key: key);
   final String title;
+  final String? url;
+
+  void _launchURL(Uri url) async {
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
+    } else {
+      throw "Could not launch $url";
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return title
-        .text
-        .bold
-        .white
-        .xl
-        .wide
-        .center
-        .make()
-        .box
-        .p8
-        .roundedLg
-        .alignCenter
-        .square(200)
-        .neumorphic(
-        color: Vx.purple700,
-        elevation: 5.0,
-        curve: VxCurve.flat)
-        .make().p8();
+    return GestureDetector(
+      onTap: (){
+        _launchURL(Uri.parse(url!));
+      },
+      child: title
+          .text
+          .bold
+          .white
+          .xl
+          .wide
+          .center
+          .make()
+          .box
+          .p8
+          .roundedLg
+          .alignCenter
+          .square(200)
+          .neumorphic(
+          color: Vx.purple700,
+          elevation: 5.0,
+          curve: VxCurve.flat)
+          .make().p8(),
+    );
   }
 }
 

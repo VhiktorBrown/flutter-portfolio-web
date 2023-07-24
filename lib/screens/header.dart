@@ -126,7 +126,7 @@ class IntroductionWidget extends StatelessWidget {
           ),
           mouseCursor: MaterialStateMouseCursor.clickable,
         ),
-        child: "Visit my portfolio website".text.make(),
+        child: "Visit Syticks.com".text.gray300.make(),
       ).h(50),
     ],
       alignment: MainAxisAlignment.spaceEvenly,
