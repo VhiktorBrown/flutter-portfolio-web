@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio_website/screens/header.dart';
+import 'package:portfolio_website/screens/middle.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../utils/colors.dart';
@@ -11,8 +12,10 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       color: AppColors.primaryColor,
-      child: const VStack([
-        HeaderScreen(),
+      child: VStack([
+        const HeaderScreen(),
+        if(context.isMobile) const IntroductionWidget().p16(),
+        IntermediateScreen()
       ]).scrollVertical(),
     );
   }

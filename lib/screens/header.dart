@@ -40,6 +40,7 @@ class HeaderScreen extends StatelessWidget {
               Row(
                 children: [
                   VStack([
+                    if(context.isMobile) 50.heightBox else 10.heightBox,
                     const CustomAppBar().shimmer(
                       primaryColor: AppColors.accentColor,
                     ),
@@ -69,10 +70,13 @@ class HeaderScreen extends StatelessWidget {
                       )
                   )
                 ],
-              )
+              ).w(context.screenWidth)
             ]),
           ])
-        ).make()
+        )
+        //.size(context.screenWidth, context.percentHeight * 60)
+        .color(AppColors.secondaryColor)
+        .make()
     );
   }
 }
